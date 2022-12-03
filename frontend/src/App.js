@@ -11,12 +11,15 @@ import Search from './components/Product/Search';
 import LogInSignUp from './components/User/LogInSignUp';
 import Profile from './components/User/Profile';
 import UpdateProfile from "./components/User/UpdateProfile";
+import UpdatePassword from "./components/User/UpdatePassword";
+import ForgotPassword from './components/User/ForgotPassword';
 import store from './store';
 import { loadUser } from './actions/userAction';
 // import ProtectedRoute from "./components/Route/ProtectedRoute";
 // import { isAuthenticatedUser } from '../../backend/middlewares/auth';
 import UserOptions from './components/layout/Header/UserOptions';
 import { useSelector } from "react-redux";
+import ResetPassword from './components/User/ResetPassword';
 
 function App() {
 
@@ -45,6 +48,9 @@ function App() {
         <Route exact path="/login" element={<LogInSignUp />} />
         {isAuthenticated && <Route exact path="/account" element={<Profile />} />}
         {isAuthenticated && <Route exact path="/me/update" element={<UpdateProfile />} />}
+        {isAuthenticated && <Route exact path="/password/update" element={<UpdatePassword />} />}
+        <Route exact path="/password/forgot" element={<ForgotPassword />} />
+        <Route exact path="/password/reset/:token" element={<ResetPassword />} />
       </Routes>
       <Footer />
     </Router>
