@@ -1,15 +1,18 @@
 import React, { Fragment } from 'react';
 import './Cart.css';
 import CartItemCard from './CartItemCard';
+import MetaData from '../layout/MetaData';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItemsToCart, removeItemsFromCart } from '../../actions/cartAction';
 import { Typography } from '@material-ui/core';
 import RemoveShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
+  const { isAuthenticated } = useSelector((state) => state.user);
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -20,7 +23,7 @@ const Cart = () => {
   };
 
   const decreaseQuantity = (id, quantity) => {
-    const newQty = quantity - 1;
+    const newQty = quantity - 1; 
     if (1 >= quantity) {
       return;
     }
@@ -29,6 +32,14 @@ const Cart = () => {
 
   const deleteCartItems = (id) => {
     dispatch(removeItemsFromCart(id));
+  };
+
+  const checkoutHandler = () => {
+    if (isAuthenticated) {
+      navigate('/shipping');
+    } else {
+      navigate('/login');
+    }
   };
 
   return (
@@ -41,6 +52,7 @@ const Cart = () => {
         </div>
       ) : (
         <Fragment>
+          <MetaData title={'Cart'} />
           <div className="cartPage">
             <div className="cartHeader">
               <p>Product</p>
@@ -90,7 +102,7 @@ const Cart = () => {
               </div>
               <div></div>
               <div className="checkOutBtn">
-                <button>Check Out</button>
+                <button onClick={checkoutHandler}>Check Out</button>
               </div>
             </div>
           </div>
