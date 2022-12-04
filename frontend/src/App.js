@@ -24,14 +24,13 @@ import { loadUser } from './actions/userAction';
 import axios from 'axios';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-// import ProtectedRoute from "./components/Route/ProtectedRoute";
-// import { isAuthenticatedUser } from '../../backend/middlewares/auth';
+import OrderSuccess from './components/Cart/OrderSuccess';
 import { useSelector } from 'react-redux';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
-  const [stripeApiKey, setStripeApiKey ] = useState("");
+  const [stripeApiKey, setStripeApiKey] = useState('');
 
   async function getStripeApiKey() {
     const { data } = await axios.get(`/api/v1/stripeapikey`);
@@ -54,7 +53,6 @@ function App() {
     <Router>
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
-      
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/product/:id" element={<ProductDetails />} />
@@ -85,7 +83,7 @@ function App() {
           <Route exact path="/order/confirm" element={<ConfirmOrder />} />
         )}
 
-        { stripeApiKey && isAuthenticated && (
+        {stripeApiKey && isAuthenticated && (
           <Route
             exact
             path="/process/payment"
@@ -96,7 +94,10 @@ function App() {
             }
           />
         )}
-        
+
+        {isAuthenticated && (
+          <Route exact path="/success" element={<OrderSuccess />} />
+        )}
       </Routes>
       <Footer />
     </Router>
