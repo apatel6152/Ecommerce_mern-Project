@@ -8,9 +8,8 @@ const OrderSuccess = () => {
   return (
     <div className="orderSuccess">
       <CheckCircleIcon />
-
       <Typography>Your Order has been Placed successfully </Typography>
-      <Link to="/orders/me">View Orders</Link>
+      <Link to="/orders">View Orders</Link>
     </div>
   );
 };

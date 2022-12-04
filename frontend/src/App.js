@@ -25,11 +25,12 @@ import axios from 'axios';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import OrderSuccess from './components/Cart/OrderSuccess';
+import MyOrders from "./components/Order/MyOrders";
 import { useSelector } from 'react-redux';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
-
+ 
   const [stripeApiKey, setStripeApiKey] = useState('');
 
   async function getStripeApiKey() {
@@ -47,7 +48,7 @@ function App() {
     store.dispatch(loadUser());
 
     getStripeApiKey();
-  }, []);
+  }, []); 
 
   return (
     <Router>
@@ -66,7 +67,7 @@ function App() {
         {isAuthenticated && (
           <Route exact path="/me/update" element={<UpdateProfile />} />
         )}
-        {isAuthenticated && (
+        {isAuthenticated && ( 
           <Route exact path="/password/update" element={<UpdatePassword />} />
         )}
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
@@ -97,6 +98,9 @@ function App() {
 
         {isAuthenticated && (
           <Route exact path="/success" element={<OrderSuccess />} />
+        )}
+        {isAuthenticated && (
+          <Route exact path="/orders" element={<MyOrders />} />
         )}
       </Routes>
       <Footer />
