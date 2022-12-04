@@ -66,6 +66,7 @@
   
   #updateProfileImage > img {
     width: 3vmax;
+    height: 3vmax;
     border-radius: 100%;
     margin: 1vmax;
   }
@@ -110,7 +111,7 @@
     background-color: rgb(179, 66, 46);
   }
   
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 650px) {
     .updateProfileContainer {
       background-color: white;
     }
@@ -134,6 +135,7 @@
   
     #updateProfileImage > img {
       width: 8vmax;
+      height: 8vmax;
       border-radius: 100%;
     }
   

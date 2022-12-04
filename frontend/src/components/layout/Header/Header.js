@@ -2,7 +2,7 @@
 import React from "react";
 import { ReactNavbar } from "overlay-navbar";
 import logo from "../../../images/logo.png";
-import { AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineSearch, AiOutlineShoppingCart } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
 
 const options = {
@@ -42,8 +42,9 @@ const options = {
   profileIconMargin: "0.5vmax",
   profileIconColor: "rgba(35, 35, 35,0.8)",
   searchIconColor: "rgba(35, 35, 35,0.8)",
-  // cartIcon: AiOutlineSearch,
-  // CartIconElement:AiOutlineSearch,
+  cartIconUrl: "/cart",
+  cartIcon :true,
+  CartIconElement:AiOutlineShoppingCart,
   cartIconColor: "rgba(35, 35, 35,0.8)",
   profileIconColorHover: "#eb4034",
   searchIconColorHover: "#eb4034",

@@ -8,18 +8,19 @@ import Home from './components/Home/Home';
 import ProductDetails from './components/Product/ProductDetails';
 import Products from './components/Product/Products';
 import Search from './components/Product/Search';
+import UserOptions from './components/layout/Header/UserOptions';
 import LogInSignUp from './components/User/LogInSignUp';
 import Profile from './components/User/Profile';
 import UpdateProfile from "./components/User/UpdateProfile";
 import UpdatePassword from "./components/User/UpdatePassword";
 import ForgotPassword from './components/User/ForgotPassword';
+import ResetPassword from './components/User/ResetPassword';
+import Cart from './components/Cart/Cart';
 import store from './store';
 import { loadUser } from './actions/userAction';
 // import ProtectedRoute from "./components/Route/ProtectedRoute";
 // import { isAuthenticatedUser } from '../../backend/middlewares/auth';
-import UserOptions from './components/layout/Header/UserOptions';
 import { useSelector } from "react-redux";
-import ResetPassword from './components/User/ResetPassword';
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
         {isAuthenticated && <Route exact path="/password/update" element={<UpdatePassword />} />}
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
         <Route exact path="/password/reset/:token" element={<ResetPassword />} />
+        <Route exact path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </Router>
