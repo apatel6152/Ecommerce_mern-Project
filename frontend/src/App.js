@@ -22,16 +22,18 @@ import Payment from './components/Cart/Payment';
 import store from './store';
 import { loadUser } from './actions/userAction';
 import axios from 'axios';
-import { Elements } from '@stripe/react-stripe-js'; 
+import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import OrderSuccess from './components/Cart/OrderSuccess';
-import MyOrders from "./components/Order/MyOrders";
-import OrderDetails from "./components/Order/OrderDetails";
+import MyOrders from './components/Order/MyOrders';
+import OrderDetails from './components/Order/OrderDetails';
+import DashBoard from './components/Admin/DashBoard';
+import ProductList from './components/Admin/ProductList';
 import { useSelector } from 'react-redux';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
- 
+
   const [stripeApiKey, setStripeApiKey] = useState('');
 
   async function getStripeApiKey() {
@@ -49,7 +51,7 @@ function App() {
     store.dispatch(loadUser());
 
     getStripeApiKey();
-  }, []); 
+  }, []);
 
   return (
     <Router>
@@ -68,7 +70,7 @@ function App() {
         {isAuthenticated && (
           <Route exact path="/me/update" element={<UpdateProfile />} />
         )}
-        {isAuthenticated && ( 
+        {isAuthenticated && (
           <Route exact path="/password/update" element={<UpdatePassword />} />
         )}
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
@@ -105,6 +107,14 @@ function App() {
         )}
         {isAuthenticated && (
           <Route exact path="/order/:id" element={<OrderDetails />} />
+        )}
+
+        {isAuthenticated && user.role === 'admin' && (
+          <Route exact path="/admin/dashboard" element={<DashBoard />} />
+        )}
+
+        {isAuthenticated && user.role === 'admin' && (
+          <Route exact path="/admin/products" element={<ProductList />} />
         )}
       </Routes>
       <Footer />
