@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Switch } from 'react-router-dom';
 import './App.css';
 import WebFont from 'webfontloader';
 import Header from './components/layout/Header/Header';
@@ -22,10 +22,11 @@ import Payment from './components/Cart/Payment';
 import store from './store';
 import { loadUser } from './actions/userAction';
 import axios from 'axios';
-import { Elements } from '@stripe/react-stripe-js';
+import { Elements } from '@stripe/react-stripe-js'; 
 import { loadStripe } from '@stripe/stripe-js';
 import OrderSuccess from './components/Cart/OrderSuccess';
 import MyOrders from "./components/Order/MyOrders";
+import OrderDetails from "./components/Order/OrderDetails";
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -101,6 +102,9 @@ function App() {
         )}
         {isAuthenticated && (
           <Route exact path="/orders" element={<MyOrders />} />
+        )}
+        {isAuthenticated && (
+          <Route exact path="/order/:id" element={<OrderDetails />} />
         )}
       </Routes>
       <Footer />
