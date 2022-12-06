@@ -30,6 +30,7 @@ import OrderDetails from './components/Order/OrderDetails';
 import DashBoard from './components/Admin/DashBoard';
 import ProductList from './components/Admin/ProductList';
 import { useSelector } from 'react-redux';
+import NewProduct from './components/Admin/NewProduct';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -116,10 +117,14 @@ function App() {
         {isAuthenticated && user.role === 'admin' && (
           <Route exact path="/admin/products" element={<ProductList />} />
         )}
-      </Routes>
-      <Footer />
+
+        {isAuthenticated && user.role === 'admin' && (
+          <Route exact path="/admin/product" element={<NewProduct />} />
+        )}
+      </Routes>  
+      <Footer/>
     </Router>
-  );
+  ); 
 }
 
 export default App;

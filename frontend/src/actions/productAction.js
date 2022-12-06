@@ -43,7 +43,7 @@ export const getProduct =
       if (category) {
         link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
       }
-
+ 
       const { data } = await axios.get(link);
 
       dispatch({
@@ -57,6 +57,52 @@ export const getProduct =
       });
     }
   };
+
+// Get All Products For Admin
+export const getAdminProduct = () => async (dispatch) => {
+  try {
+    dispatch({ type: ADMIN_PRODUCT_REQUEST });
+
+    const { data } = await axios.get("/api/v1/admin/products");
+
+    dispatch({
+      type: ADMIN_PRODUCT_SUCCESS,
+      payload: data.products,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADMIN_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Create Product
+export const createProduct = (productData) => async (dispatch) => {
+  try {
+    dispatch({ type: NEW_PRODUCT_REQUEST });
+
+    const config = {
+      headers: { "Content-Type": "application/json" },
+    };
+
+    const { data } = await axios.post(
+      `/api/v1/admin/product/new`,
+      productData,
+      config
+    );
+
+    dispatch({
+      type: NEW_PRODUCT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: NEW_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // Get Products Details
 export const getProductDetails = (id) => async (dispatch) => {
