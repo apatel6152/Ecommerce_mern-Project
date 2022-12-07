@@ -1,8 +1,6 @@
 const app = require('./app');
 const mongoose = require('mongoose');
 const cloudinary = require('cloudinary');
-const dotenv = require('dotenv');
-// const connectDatabase = require('./config/database');
 
 // Handling Uncaught Exception
 process.on('uncaughtException', (err) => {
@@ -11,8 +9,10 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-//config
-dotenv.config({ path: 'backend/config/config.env' });
+// Config
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config({ path: "backend/config/config.env" });
+}
 
 //connecting to database
 mongoose.connect(process.env.DB_URI);
@@ -24,7 +24,7 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error', () => {
   console.log('successfully not connected to mongoDb');
 });
-// connectDatabase();
+
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
