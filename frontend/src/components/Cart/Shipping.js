@@ -18,14 +18,14 @@ const Shipping = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const alert = useAlert();
-  const { shippingInfo } = useSelector((state) => state.cart);
+//   const { shippingInfo } = useSelector((state) => state.cart);
 
-  const [address, setAddress] = useState(shippingInfo.address);
-  const [city, setCity] = useState(shippingInfo.city);
-  const [state, setState] = useState(shippingInfo.state);
-  const [country, setCountry] = useState(shippingInfo.country);
-  const [pinCode, setPinCode] = useState(shippingInfo.pinCode);
-  const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo);
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [country, setCountry] = useState('');
+  const [pinCode, setPinCode] = useState('');
+  const [phoneNo, setPhoneNo] = useState('');
 
   const shippingSubmit = (e) => {
     e.preventDefault();
@@ -37,6 +37,12 @@ const Shipping = () => {
     dispatch(
       saveShippingInfo({ address, city, state, country, pinCode, phoneNo })
     );
+    setAddress('');
+    setCity('');
+    setState('');
+    setCountry('');
+    setPinCode('');
+    setPhoneNo('');
     navigate("/order/confirm");
   };
 

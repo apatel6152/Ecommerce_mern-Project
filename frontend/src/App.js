@@ -37,6 +37,9 @@ import ProcessOrder from './components/Admin/ProcessOrder';
 import UserList from './components/Admin/UserList';
 import UpdateUser from './components/Admin/UpdateUser';
 import ProductReviews from './components/Admin/ProductReviews';
+import Contact from './components/layout/Contact/Contact';
+import About from './components/layout/About/About';
+import NotFound from './components/layout/NotFound/NotFound';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -70,6 +73,8 @@ function App() {
         <Route exact path="/products" element={<Products />} />
         <Route exact path="/products/:keyword" element={<Products />} />
         <Route exact path="/search" element={<Search />} />
+        <Route exact path="/contact" element={<Contact />} />
+        <Route exact path="/about" element={<About />} />
         <Route exact path="/login" element={<LogInSignUp />} />
         {isAuthenticated && (
           <Route exact path="/account" element={<Profile />} />
@@ -150,10 +155,12 @@ function App() {
         {isAuthenticated && user.role === 'admin' && (
           <Route exact path="/admin/reviews" element={<ProductReviews />} />
         )}
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
-    </Router>
-  );
+    </Router> 
+  ); 
 }
 
 export default App;
