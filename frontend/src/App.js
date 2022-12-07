@@ -34,6 +34,9 @@ import NewProduct from './components/Admin/NewProduct';
 import UpdateProduct from './components/Admin/UpdateProduct';
 import OrderList from './components/Admin/OrderList';
 import ProcessOrder from './components/Admin/ProcessOrder';
+import UserList from './components/Admin/UserList';
+import UpdateUser from './components/Admin/UpdateUser';
+import ProductReviews from './components/Admin/ProductReviews';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -135,6 +138,17 @@ function App() {
 
         {isAuthenticated && user.role === 'admin' && (
           <Route exact path="/admin/order/:id" element={<ProcessOrder />} />
+        )}
+
+        {isAuthenticated && user.role === 'admin' && (
+          <Route exact path="/admin/users" element={<UserList />} />
+        )}
+        {isAuthenticated && user.role === 'admin' && (
+          <Route exact path="/admin/user/:id" element={<UpdateUser />} />
+        )}
+
+        {isAuthenticated && user.role === 'admin' && (
+          <Route exact path="/admin/reviews" element={<ProductReviews />} />
         )}
       </Routes>
       <Footer />

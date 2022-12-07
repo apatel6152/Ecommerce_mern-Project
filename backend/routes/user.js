@@ -25,6 +25,6 @@ router.get("/admin/user/:id",isAuthenticatedUser,authorizeRoles("admin"), userCo
 
 router.put("/admin/user/:id",isAuthenticatedUser,authorizeRoles("admin"), userController.updateUserRole);
 
-router.delete("/admin/user/:id",isAuthenticatedUser,authorizeRoles("user"), userController.deleteUser);
+router.delete("/admin/user/:id",isAuthenticatedUser,authorizeRoles("admin"), userController.deleteUser);
 
 module.exports = router;

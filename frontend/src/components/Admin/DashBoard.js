@@ -11,6 +11,7 @@ import { getAllOrders } from '../../actions/orderAction';
 
 import Chart from 'chart.js/auto';
 import { CategoryScale } from 'chart.js';
+import { getAllUsers } from '../../actions/userAction.js';
 Chart.register(CategoryScale);
 
 const DashBoard = () => {
@@ -18,6 +19,7 @@ const DashBoard = () => {
 
   const { products } = useSelector((state) => state.products);
   const { orders } = useSelector((state) => state.allOrders);
+  const { users } = useSelector((state) => state.allUsers);
 
   let outOfStock = 0;
 
@@ -31,6 +33,7 @@ const DashBoard = () => {
   useEffect(() => {
     dispatch(getAdminProduct());
     dispatch(getAllOrders());
+    dispatch(getAllUsers());
   }, [dispatch]);
 
   const lineState = {
@@ -80,7 +83,7 @@ const DashBoard = () => {
             </Link>
             <Link to="/admin/users">
               <p>Users</p>
-              <p>3</p> 
+              <p>{users && users.length}</p> 
             </Link>
           </div>
         </div>
@@ -89,7 +92,7 @@ const DashBoard = () => {
         </div>
 
         <div className="doughnutChart">
-          <Doughnut data={doughnutState} />
+          <Doughnut data={doughnutState} />  
         </div>
       </div>
     </div>
