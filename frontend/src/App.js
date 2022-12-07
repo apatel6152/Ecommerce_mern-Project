@@ -32,6 +32,8 @@ import ProductList from './components/Admin/ProductList';
 import { useSelector } from 'react-redux';
 import NewProduct from './components/Admin/NewProduct';
 import UpdateProduct from './components/Admin/UpdateProduct';
+import OrderList from './components/Admin/OrderList';
+import ProcessOrder from './components/Admin/ProcessOrder';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -125,6 +127,14 @@ function App() {
 
         {isAuthenticated && user.role === 'admin' && (
           <Route exact path="/admin/product/:id" element={<UpdateProduct />} />
+        )}
+
+        {isAuthenticated && user.role === 'admin' && (
+          <Route exact path="/admin/orders" element={<OrderList />} />
+        )}
+
+        {isAuthenticated && user.role === 'admin' && (
+          <Route exact path="/admin/order/:id" element={<ProcessOrder />} />
         )}
       </Routes>
       <Footer />
