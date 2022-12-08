@@ -25,6 +25,17 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     },
   });
 
+  const message = `Congratulations, Welcome to Ecommerce Store. Happy buying.`;
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: `Ecommerce SignUp Successfully`,
+      message,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+
   //   const token = user.getJWTToken();
 
   //   res.status(201).json({
