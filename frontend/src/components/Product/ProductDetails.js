@@ -108,7 +108,7 @@ const ProductDetails = () => {
         <Fragment>
           <MetaData title={`${product.name} -- ECOMMERCE`} />
           <div className="ProductDetails">
-            <div>
+            {/* <div className="ProductImages"> */}
               <Carousel>
                 {product.images &&
                   product.images.map((item, i) => (
@@ -120,7 +120,7 @@ const ProductDetails = () => {
                     />
                   ))}
               </Carousel>
-            </div>
+             
 
             <div>
               <div className="detailsBlock-1">
@@ -197,7 +197,7 @@ const ProductDetails = () => {
               </Button>
               <Button onClick={reviewSubmitHandler} color="primary">
                 Submit
-              </Button>
+              </Button> 
             </DialogActions>
           </Dialog>
 
